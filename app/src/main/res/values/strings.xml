@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CBCAssignment</string>
     <string name="title">Title</string>
+    <string name="image_view_description">Some Image Of News</string>
 </resources>
