@@ -39,9 +39,11 @@ class CBCNewsRecyclerViewAdapter :
         private val imageView: ImageView = view.imageView
         private val dateView: TextView = view.datePublishedTV
         private val titleView: TextView = view.titleTV
+        private val typeView : TextView = view.typeTV
 
         fun bind(news: News) {
             dateView.text = news.readablePublishedAt
+            typeView.text = news.type
             titleView.text = news.title
 
             Glide.with(imageView)
