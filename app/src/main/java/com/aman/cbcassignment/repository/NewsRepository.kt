@@ -33,6 +33,7 @@ class NewsRepository @Inject constructor(
             val result = newsAPIInterface.getNews("news")
             if (result.isSuccessful && result.body() != null) {
                 //Save Data to Database once its available from API
+                newsDatabase.newsDAO().deleteFromDB()
                 newsDatabase.newsDAO().addNewsToDB(result.body()!!)
 
                 //To be observed in the ViewModel
