@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aman.cbcassignment.model.News
 import com.aman.cbcassignment.repository.NewsRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: NewsRepository) : ViewModel() {
@@ -15,7 +16,7 @@ class MainViewModel(private val repository: NewsRepository) : ViewModel() {
     get() = repository.news
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.getProducts()
         }
     }
