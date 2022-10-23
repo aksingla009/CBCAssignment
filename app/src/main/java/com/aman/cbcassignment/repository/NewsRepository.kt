@@ -1,6 +1,7 @@
 package com.aman.cbcassignment.repository
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.aman.cbcassignment.db.NewsDatabase
@@ -19,17 +20,12 @@ class NewsRepository @Inject constructor(
     val news: LiveData<List<News>>
         get() = _news
 
-    // Network Availability live Data will be observed by our view Model
-    private val _isNetworkConnected = MutableLiveData<Boolean>()
-    val isNetworkConnected: LiveData<Boolean>
-        get() = _isNetworkConnected
-
     // This method will be triggered by the view model once data is required
     suspend fun getProductsFromAPI() {
         //Before Hitting the API First check if network is available or not
         // And communicate to the UI as well
         if (NetworkUtils.isInternetAvailable(context)) {
-            _isNetworkConnected.postValue(true)
+            Log.e("AMAN","AMAN API HIT")
             val result = newsAPIInterface.getNews("news")
             if (result.isSuccessful && result.body() != null) {
                 //Save Data to Database once its available from API
@@ -42,7 +38,7 @@ class NewsRepository @Inject constructor(
         } else {
             // If network is not connected then update UI accordingly
             // And fetch Data from DB saved earlier
-            _isNetworkConnected.postValue(false)
+            Log.e("AMAN","AMAN DB HIT")
             val news = newsDatabase.newsDAO().getNewsFromDB()
             _news.postValue(news)
         }

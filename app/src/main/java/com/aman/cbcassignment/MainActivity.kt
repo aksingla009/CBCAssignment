@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aman.cbcassignment.adapter.CBCNewsRecyclerViewAdapter
 import com.aman.cbcassignment.model.News
+import com.aman.cbcassignment.utils.NetworkUtils
 import com.aman.cbcassignment.viewmodels.MainViewModel
 import com.aman.cbcassignment.viewmodels.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
@@ -57,11 +58,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        mainViewModel.isNetworkConnected.observe(this) {
-            if (it.not()) {
-                Toast.makeText(this@MainActivity, "Disconnected", LENGTH_LONG).show()
-            } else {
-                Toast.makeText(this@MainActivity, "Back Online", LENGTH_LONG).show()
+        NetworkUtils.getConnectionStatus().observe(this){
+            if(it.not()){
+                Toast.makeText(this@MainActivity, "Offline", LENGTH_LONG).show()
+            }else{
+                Toast.makeText(this@MainActivity, "Online", LENGTH_LONG).show()
             }
         }
     }
