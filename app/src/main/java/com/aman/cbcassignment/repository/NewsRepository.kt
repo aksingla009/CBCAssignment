@@ -1,7 +1,6 @@
 package com.aman.cbcassignment.repository
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.aman.cbcassignment.db.NewsDatabase
@@ -21,14 +20,13 @@ class NewsRepository @Inject constructor(
         get() = _news
 
     // This method will be triggered by the view model once data is required
-    suspend fun getProductsFromAPI() {
+    suspend fun getNews() {
         //Before Hitting the API First check if network is available or not
-        // And communicate to the UI as well
         if (NetworkUtils.isInternetAvailable(context)) {
-            Log.e("AMAN","AMAN API HIT")
             val result = newsAPIInterface.getNews("news")
             if (result.isSuccessful && result.body() != null) {
                 //Save Data to Database once its available from API
+                // Delete previous entries from DB if API is available
                 newsDatabase.newsDAO().deleteFromDB()
                 newsDatabase.newsDAO().addNewsToDB(result.body()!!)
 
@@ -38,11 +36,8 @@ class NewsRepository @Inject constructor(
         } else {
             // If network is not connected then update UI accordingly
             // And fetch Data from DB saved earlier
-            Log.e("AMAN","AMAN DB HIT")
             val news = newsDatabase.newsDAO().getNewsFromDB()
             _news.postValue(news)
         }
-
-
     }
 }

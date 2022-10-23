@@ -20,7 +20,10 @@ class MainViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getProductsFromAPI()
+            // viewModel will request to get News from Repository
+            // View Model need not worry about the Connection Status and underlying implementation of repo
+
+            repository.getNews()
         }
     }
 
