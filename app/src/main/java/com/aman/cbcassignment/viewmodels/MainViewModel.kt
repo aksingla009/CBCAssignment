@@ -25,5 +25,20 @@ class MainViewModel @Inject constructor(private val repository: NewsRepository) 
         }
     }
 
+    fun getFilteredListOfTypes(): List<String> {
+        val spinnerList = mutableListOf<String>()
+        spinnerList.add(0, "SELECT")
+
+        val filteredList = newsLiveData.value?.distinctBy {
+            it.type
+        }?.map { filteredType ->
+            filteredType.type
+        }
+        filteredList?.let {
+            spinnerList.addAll(it)
+        }
+        return spinnerList
+    }
+
 
 }
