@@ -32,3 +32,6 @@ Once the list was getting populated I implemented filter functionality based on 
 For that I added Spinner with list of types of news, On selecting that only those news would be displayed with that type.
 
 At last I cleaned up the code a little.
+
+![image](https://user-images.githubusercontent.com/10522019/197409894-30419bd3-0c51-498e-b2f2-8c6807b35ade.png)
+
