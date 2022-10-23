@@ -23,7 +23,8 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var mainViewModel: MainViewModel
 
-    private lateinit var recyclerViewAdapter: CBCNewsRecyclerViewAdapter
+    @Inject
+    lateinit var recyclerViewAdapter: CBCNewsRecyclerViewAdapter
 
     private var filteredTypesList: List<String> = mutableListOf()
     private var newsList: List<News> = mutableListOf()
@@ -63,7 +64,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerViewAdapter = CBCNewsRecyclerViewAdapter()
         recyclerView.adapter = recyclerViewAdapter
     }
 

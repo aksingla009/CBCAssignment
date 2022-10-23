@@ -7,13 +7,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.aman.cbcassignment.R
+import com.aman.cbcassignment.adapter.CBCNewsRecyclerViewAdapter.CBCNewsItemViewHolder
 import com.aman.cbcassignment.model.News
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.news_item_layout.view.*
+import javax.inject.Inject
 
-class CBCNewsRecyclerViewAdapter :
-    RecyclerView.Adapter<CBCNewsRecyclerViewAdapter.CBCNewsItemViewHolder>() {
+class CBCNewsRecyclerViewAdapter @Inject constructor() :
+    RecyclerView.Adapter<CBCNewsItemViewHolder>() {
 
     private var newsListData: List<News>? = null
 
