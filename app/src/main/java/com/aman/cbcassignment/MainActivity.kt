@@ -10,19 +10,18 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatSpinner
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aman.cbcassignment.adapter.CBCNewsRecyclerViewAdapter
 import com.aman.cbcassignment.model.News
 import com.aman.cbcassignment.utils.NetworkUtils
 import com.aman.cbcassignment.viewmodels.MainViewModel
-import com.aman.cbcassignment.viewmodels.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mainViewModel: MainViewModel
+    @Inject
+    lateinit var mainViewModel: MainViewModel
 
     private lateinit var recyclerViewAdapter: CBCNewsRecyclerViewAdapter
 
@@ -31,17 +30,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var filterSpinnerAdapter: ArrayAdapter<String>
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         (application as NewsApplication).applicationComponent.inject(this)
-
-        mainViewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         initRecyclerView()
 
